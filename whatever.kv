@@ -1,18 +1,35 @@
+#: import utils kivy.utils
+
+<Button>
+	font_size: 32
+	background_normal: ''
+	background_color: utils.get_color_from_hex('#4d0099')
+
+<TextInput>
+	background_normal: ''
+	background_color: utils.get_color_from_hex('#b3b3cc')
+
 <MyLayout>
 	BoxLayout:
 		orientation: "vertical"
 		size: root.width, root.height
 
-		padding: 50
-		spacing: 20
+		padding: 10
+		spacing: 10
 
-		Button:	
-			text: "Hello World!"
+		Label:
+			text: "Name"
 
-		Button:	
-			text: "Goodbye World!"
+		TextInput:
+			multiline: False
 
-		Button:	
-			text: "I'm Hungry!"
-			pos_hint: {'center_x': 0.5}
-			size_hint: (0.5, 0.5)
+		Label:
+			text: "Favorite Pizza"
+
+		TextInput:
+			multiline: False
+
+		Button: 
+			text: "Submit"
+		Button: 
+			text: "Clear"
