@@ -19,17 +19,21 @@
 
 		Label:
 			text: "Name"
+			font_size: 32
+			background_color: (0, 0, 1, 1)
+			canvas.before:
+				Color:
+					rgba: self.background_color
+				Rectangle:
+					size: self.size
+					pos: self.pos
 
-		TextInput:
-			multiline: False
+			# Text Properties
+			color: (1, 0, 0, 1)
+			bold: True
+			italic: True
+			outline_color: (0, 0, 0)
+			outline_width: 5
 
-		Label:
-			text: "Favorite Pizza"
-
-		TextInput:
-			multiline: False
-
-		Button: 
-			text: "Submit"
 		Button: 
 			text: "Clear"
