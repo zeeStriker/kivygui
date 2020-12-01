@@ -1,30 +1,28 @@
-#: import utils kivy.utils
+<Button>
+	font_size: 32
+	size_hint: (0.3, 0.3)
 
 <MyLayout>
-	BoxLayout:
-		orientation: "vertical"
+	FloatLayout:
 		size: root.width, root.height
 
-		padding: 10
-		spacing: 10
+		Button:
+			text: "Top Left"
+			# {"x", "y", "top", "bottom", "left", "right"}
+			pos_hint: {"x":0, "top":1}
 
-		Label:
-			text: "Name"
-			font_size: 32
-			background_color: (0, 0, 1, 1)
-			canvas.before:
-				Color:
-					rgba: self.background_color
-				Rectangle:
-					size: self.size
-					pos: self.pos
+		Button:
+			text: "Top Right"
+			pos_hint: {"x":.7, "top":1}
 
-			# Text Properties
-			color: (1, 0, 0, 1)
-			bold: True
-			italic: True
-			outline_color: (0, 0, 0)
-			outline_width: 5
+		Button:
+			text: "Center"
+			pos_hint: {"x":.35, "y":.35}
 
-		Button: 
-			text: "Clear"
+		Button:
+			text: "Bottom Left"
+			pos_hint: {"x":0, "bottom":1}
+
+		Button:
+			text: "Bottom Right"
+			pos_hint: {"x":.7, "bottom":1}
