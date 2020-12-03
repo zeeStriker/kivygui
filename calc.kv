@@ -23,23 +23,24 @@
 			Button:
 				size_hint: (.15, .15)
 				font_size: 28
-				text: 'CE'
+				text: 'C'
 				background_color: (191/255, 128/255, 1, 1)
+				on_press: root.clear()
 
 			Button:
 				id: clear
 				size_hint: (.15, .15)
 				font_size: 28
-				text: 'C'
+				text: u'\u00AB'
 				background_color: (191/255, 128/255, 1, 1)
-				on_press: root.clear()
+				on_press: root.remove()
 
 			Button:
 				size_hint: (.15, .15)
 				font_size: 28
 				text: '/'
 				background_color: (191/255, 128/255, 1, 1)
-				on_press: root.divide()
+				on_press: root.math_sign('/')
 
 			Button:
 				size_hint: (.15, .15)
@@ -67,7 +68,7 @@
 				font_size: 28
 				text: 'x'
 				background_color: (191/255, 128/255, 1, 1)
-				on_press: root.multiply()
+				on_press: root.math_sign('*')
 
 			Button:
 				size_hint: (.15, .15)
@@ -95,7 +96,7 @@
 				font_size: 28
 				text: '-'
 				background_color: (191/255, 128/255, 1, 1)
-				on_press: root.subtract()
+				on_press: root.math_sign('-')
 
 			Button:
 				size_hint: (.15, .15)
@@ -123,13 +124,14 @@
 				font_size: 28
 				text: '+'
 				background_color: (191/255, 128/255, 1, 1)
-				on_press: root.add()
+				on_press: root.math_sign('+')
 
 			Button:
 				size_hint: (.15, .15)
 				font_size: 28
 				text: '+/-'
 				background_color: (102/255, 0, 204/255, 1)
+				on_press: root.pos_neg()
 
 			Button:
 				size_hint: (.15, .15)
@@ -143,6 +145,7 @@
 				font_size: 28
 				text: '.'
 				background_color: (102/255, 0, 204/255, 1)
+				on_press:root.dot()
 
 			Button:
 				size_hint: (.15, .15)
