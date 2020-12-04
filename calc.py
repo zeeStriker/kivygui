@@ -24,6 +24,7 @@ class MyLayout(Widget):
 	# Create a function for pos/neg
 	def pos_neg(self):
 		prior = self.ids.calc_input.text
+
 		# Search prior for a negative number
 		if '-' in prior:
 			self.ids.calc_input.text = f'{prior.replace("-", "")}'
@@ -37,8 +38,8 @@ class MyLayout(Widget):
 
 		# Determine if 0 is there
 		if prior == '0':
-				self.ids.calc_input.text = ''
-				self.ids.calc_input.text = f'{button}'
+			self.ids.calc_input.text = ''
+			self.ids.calc_input.text = f'{button}'
 		else:
 			self.ids.calc_input.text = f'{prior}{button}'
 
@@ -63,56 +64,9 @@ class MyLayout(Widget):
 
 	# Create equals function
 	def equals(self):
-		# Create a variable that was previously in the text box
+		# Create a variable for text previously in the text box
 		prior = self.ids.calc_input.text
-
-		# Addition
-		if '+' in prior:
-			num_list = prior.split("+")
-			answer = 0.0
-
-			# loop through our list
-			for number in num_list:
-				answer = answer + float(number)
-
-			# print the answer to text box
-			self.ids.calc_input.text = str(answer)
-
-		# # Subtraction
-		# if '-' in prior:
-		# 	num_list = prior.split("-")
-		# 	answer = 0
-
-		# 	# loop through our list
-		# 	for number in num_list:
-		# 		answer = answer - int(number)
-
-		# 	# print the answer to text box
-		# 	self.ids.calc_input.text = str(answer)
-
-		# # Multiplication
-		# if '*' in prior:
-		# 	num_list = prior.split("*")
-		# 	answer = 0
-
-		# 	# loop through our list
-		# 	for number in num_list:
-		# 		answer = answer * int(number)
-
-		# 	# print the answer to text box
-		# 	self.ids.calc_input.text = str(answer)
-
-		# # Division
-		# if '/' in prior:
-		# 	num_list = prior.split("/")
-		# 	answer = 0
-
-		# 	# loop through our list
-		# 	for number in num_list:
-		# 		answer = answer / int(number)
-
-		# 	# print the answer to text box
-		# 	self.ids.calc_input.text = str(answer)
+		self.ids.calc_input.text = str(eval(prior))
 	
 class CalculatorApp(App):
 	def build(self):
