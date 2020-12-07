@@ -56,6 +56,32 @@ class MyLayout(Widget):
 		if '.' not in self.display_val:
 			self.ids.calc_input.text = f'{self.display_val}.'
 
+	# Create function to make input positive/negative
+	def pos_neg(self):
+
+		self.display_val = self.ids.calc_input.text
+
+		if self.display_val == '0':
+			self.ids.calc_input.text = ''
+			self.ids.calc_input.text = f'-'
+			self.display_val = self.ids.calc_input.text
+		elif '-' in self.display_val:
+			self.ids.calc_input.text = f'{self.display_val.replace("-","")}'
+			self.display_val = self.ids.calc_input.text
+		else:
+			self.ids.calc_input.text = f'-{self.display_val}'
+			self.display_val = self.ids.calc_input.text
+
+	# Create function to convert to percentage
+	def percentage(self):
+
+		if self.answer == '0':
+			pass
+		else:
+			self.answer = self.answer / 100
+			self.ids.calc_input.text = str(self.answer)
+			self.answer = '0'
+
 	# Function to perform operations
 	def operator(self, button):
 		
