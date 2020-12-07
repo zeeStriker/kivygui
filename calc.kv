@@ -7,9 +7,9 @@
 			id: calc_input
 			text: "0"
 			halign: "right"
-			font_size: 65
+			font_size: 55
 			size_hint: (1, .15)
-
+			
 		GridLayout:
 			cols: 4
 			rows: 5
@@ -40,7 +40,7 @@
 				font_size: 28
 				text: u'\u00f7'
 				background_color: (191/255, 128/255, 1, 1)
-				on_press: root.math_sign('/')
+				on_press: root.operator('/')
 
 			Button:
 				size_hint: (.15, .15)
@@ -68,7 +68,7 @@
 				font_size: 28
 				text: u'\u00D7'
 				background_color: (191/255, 128/255, 1, 1)
-				on_press: root.math_sign('*')
+				on_press: root.operator('*')
 
 			Button:
 				size_hint: (.15, .15)
@@ -96,7 +96,7 @@
 				font_size: 28
 				text: u'\u2212'
 				background_color: (191/255, 128/255, 1, 1)
-				on_press: root.math_sign('-')
+				on_press: root.operator('-')
 
 			Button:
 				size_hint: (.15, .15)
@@ -124,7 +124,7 @@
 				font_size: 28
 				text: '+'
 				background_color: (191/255, 128/255, 1, 1)
-				on_press: root.math_sign('+')
+				on_press: root.operator('+')
 
 			Button:
 				size_hint: (.15, .15)
@@ -145,11 +145,11 @@
 				font_size: 28
 				text: '.'
 				background_color: (102/255, 0, 204/255, 1)
-				on_press:root.dot()
+				on_press: root.dot()
 
 			Button:
 				size_hint: (.15, .15)
 				font_size: 28
 				text: '='
 				background_color: (203/255, 128/255, 1, 1)
-				on_press: root.equals()
+				on_press: root.operator('=')
