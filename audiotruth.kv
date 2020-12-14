@@ -1,0 +1,29 @@
+<MyLayout>
+	# Clear the background color
+	background_color: (1,1,1,1)
+	canvas.before:
+		Color:
+			rgba: self.background_color
+		Rectangle:
+			size: self.size
+			pos: self.pos
+
+	FloatLayout:
+		size: root.width, root.height
+
+		Label:
+			size_hint: (0.37, 1)
+			background_color: (191/255,191/255,191/255,1)
+			canvas.before:
+				Color:
+					rgba: self.background_color
+				Rectangle:
+					size: self.size
+					pos: self.pos
+			# Text properties
+			text: "Hello,\n\nLet's get started by\nuploading your audio file."
+			font_size: 18
+			color: (0,0,0,1)
+			
+
+			

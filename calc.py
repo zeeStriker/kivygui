@@ -10,114 +10,99 @@ Window.size = (400, 600)
 Builder.load_file('calc.kv')
 
 class MyLayout(Widget):
-	
-	pending_val = '0'
-	display_val = '0'
-	answer = '0'
-	eval_string_array = []
-
-	# Function to clear text box
 	def clear(self):
-		self.display_val = '0'
-		self.pending_val = '0'
-		self.eval_string_array =[]
-		self.ids.calc_input.text = self.display_val
+		self.ids.calc_input.text = '0'
 
-	# Function to remove the last character in text box
-	def remove(self):
-		self.display_val = self.ids.calc_input.text
-		# Remove the last item in the text box
-		self.display_val = self.display_val[:-1]
-		# Output back to the text box
-		self.ids.calc_input.text = self.display_val
-
-		if self.display_val == '':
-			self.display_val = '0'
-			self.ids.calc_input.text = self.display_val
-
+	# Create a button pressing function
 	def button_press(self, button):
-		# Create a variable that was previously in the text box
-		self.display_val = self.ids.calc_input.text
+		# create a variable that contains whatever was in the text box already
+		prior = self.ids.calc_input.text
+		
+		# Test for error first
+		if "Error" in prior:
+			prior = ''
 
-		# Determine if 0 is there
-		if self.display_val == '0':
-			self.ids.calc_input.text = ''
-			self.ids.calc_input.text = f'{button}'
-			self.display_val = self.ids.calc_input.text
+		# determine if 0 is sitting there
+		if prior == "0":
+				self.ids.calc_input.text = ''
+				self.ids.calc_input.text = f'{button}'
+		else: 
+			self.ids.calc_input.text = f'{prior}{button}'
+	
+
+	# Create Function to remove last character in text box
+	def remove(self):
+		prior = self.ids.calc_input.text
+		# Remove The last item in the textbox
+		prior = prior[:-1]
+		# Output back to the textbox
+		self.ids.calc_input.text = prior
+
+		if prior == '':
+			prior = '0'
+			self.ids.calc_input.text = prior
+	
+	# Create function to make text box positive or negative
+	def pos_neg(self):
+		prior = self.ids.calc_input.text
+		# Test to see if there's a - sign already
+		if "-" in prior:
+			 self.ids.calc_input.text = f'{prior.replace("-", "")}'
 		else:
-			self.ids.calc_input.text += f'{button}'
-			self.display_val = self.ids.calc_input.text
+			self.ids.calc_input.text = f'-{prior}'
 
 	# Create decimal function
 	def dot(self):
+		prior = self.ids.calc_input.text
+		# Split out text box by +
+		num_list = prior.split("+")
 		
-		self.display_val = self.ids.calc_input.text
-		
-		if '.' not in self.display_val:
-			self.ids.calc_input.text = f'{self.display_val}.'
+		if "+" in prior and "." not in num_list[-1]:
+			# Add a decimal to the end of the text
+			prior = f'{prior}.'
+			# Output back to the text box
+			self.ids.calc_input.text = prior
 
-	# Create function to make input positive/negative
-	def pos_neg(self):
-
-		self.display_val = self.ids.calc_input.text
-
-		if self.display_val == '0':
-			self.ids.calc_input.text = ''
-			self.ids.calc_input.text = f'-'
-			self.display_val = self.ids.calc_input.text
-		elif '-' in self.display_val:
-			self.ids.calc_input.text = f'{self.display_val.replace("-","")}'
-			self.display_val = self.ids.calc_input.text
-		else:
-			self.ids.calc_input.text = f'-{self.display_val}'
-			self.display_val = self.ids.calc_input.text
-
-	# Create function to convert to percentage
-	def percentage(self):
-
-		if self.answer == '0':
+		elif "." in prior:
 			pass
 		else:
-			self.answer = self.answer / 100
-			self.ids.calc_input.text = str(self.answer)
-			self.answer = '0'
+			# Add a decimal to the end of the text
+			prior = f'{prior}.'
+			# Output back to the text box
+			self.ids.calc_input.text = prior
 
-	# Function to perform operations
-	def operator(self, button):
+	# create addition function
+	def math_sign(self, sign):
+		# create a variable that contains whatever was in the text box already
+		prior = self.ids.calc_input.text
 		
-		if button == '+':
-			self.pending_val = self.display_val
-			self.display_val = '0'
-			self.ids.calc_input.text = self.display_val
-			self.eval_string_array.append(self.pending_val)
-			self.eval_string_array.append('+')
+		# slap a plus sign to the text box
+		self.ids.calc_input.text = f'{prior}{sign}'
 
-		elif button == '-':
-			self.pending_val = self.display_val
-			self.display_val = '0'
-			self.ids.calc_input.text = self.display_val
-			self.eval_string_array.append(self.pending_val)
-			self.eval_string_array.append('-')
+	
+	# create equals to function
+	def equals(self):
+		prior = self.ids.calc_input.text
+		 # Error Handling
+		try:
+		 	# Evaluate the math from the text box
+			answer = eval(prior)
+			# Output the answer
+			self.ids.calc_input.text = str(answer)
+		except:
+			self.ids.calc_input.text = "Error"
 
-		elif button == '*':
-			self.pending_val = self.display_val
-			self.display_val = '0'
-			self.ids.calc_input.text = self.display_val
-			self.eval_string_array.append(self.pending_val)
-			self.eval_string_array.append('*')
-
-		elif button == '/':
-			self.pending_val = self.display_val
-			self.display_val = '0'
-			self.ids.calc_input.text = self.display_val
-			self.eval_string_array.append(self.pending_val)
-			self.eval_string_array.append('/')
-
-		elif button == '=':
-			self.eval_string_array.append(self.display_val)
-			self.answer = eval(' '.join(self.eval_string_array))
-			self.ids.calc_input.text = str(self.answer)
-			self.eval_string_array = []
+		'''
+		# Addition
+		if "+" in prior:
+			num_list = prior.split("+")
+			answer = 0.0
+			# loop thru our list
+			for number in num_list:
+				answer = answer + float(number)
+			# print the answer in the text box
+			self.ids.calc_input.text = str(answer)
+		'''
 
 class CalculatorApp(App):
 	def build(self):
